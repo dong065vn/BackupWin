@@ -34,9 +34,11 @@ class FileOrganizer:
                 else:
                     base_path = os.path.dirname(sys.executable)
             else:
-                # Running from source
-                base_path = os.path.dirname(os.path.dirname(__file__))
-            
+                # Running from source - get project root
+                # __file__ = c:\Project\BackupWin\app\services\file_organizer.py
+                # We need to go up 2 levels to get to project root
+                base_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+
             config_path = os.path.join(base_path, 'config', 'file_categories.json')
 
         self.config_path = config_path
