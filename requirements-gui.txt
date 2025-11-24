@@ -1,0 +1,21 @@
+# Minimal requirements for GUI application
+# These are the essential packages needed to run the desktop app
+
+# GUI Framework
+customtkinter==5.2.2
+pillow>=10.4.0
+packaging>=24.2
+
+# Core utilities
+python-dotenv>=1.0.1
+loguru>=0.7.3
+
+# Configuration and validation
+pydantic>=2.9.2
+pydantic-settings>=2.6.0
+
+# Type hints support (for older Python versions)
+typing-extensions>=4.0.0
+
+# Optional: For building executable
+# pyinstaller==6.11.1

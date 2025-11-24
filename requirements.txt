@@ -1,0 +1,71 @@
+# BackupWin - Full Requirements (API + GUI)
+# Install: pip install -r requirements.txt
+# For GUI only: pip install -r requirements-gui.txt
+
+# ================================
+# Web Framework & API
+# ================================
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+python-multipart==0.0.18
+
+# ================================
+# Data Validation & Configuration
+# ================================
+pydantic==2.9.2
+pydantic-settings==2.6.0
+typing-extensions>=4.0.0
+
+# ================================
+# Database
+# ================================
+psycopg[binary]>=3.2.0  # PostgreSQL driver (psycopg3 for Python 3.14+ compatibility)
+sqlalchemy==2.0.36
+alembic==1.14.0
+
+# ================================
+# File Operations & Utilities
+# ================================
+watchdog==6.0.0              # File system event monitoring
+python-magic-bin==0.4.14     # File type detection (Windows)
+tqdm==4.67.0                 # Progress bars
+aiofiles==24.1.0             # Async file operations
+filetype==1.2.0              # Advanced file type detection
+
+# ================================
+# Cloud Storage (Optional)
+# ================================
+boto3==1.35.65               # For Cloudflare R2, AWS S3
+
+# ================================
+# Core Utilities
+# ================================
+python-dotenv==1.0.1         # Environment variables
+loguru==0.7.3                # Logging
+
+# ================================
+# GUI Framework
+# ================================
+customtkinter==5.2.2         # Modern Tkinter UI
+pillow==10.4.0               # Image processing
+packaging==24.2              # Version parsing
+
+# ================================
+# Build Tools
+# ================================
+pyinstaller==6.11.1          # Build standalone executable
+
+# ================================
+# Testing
+# ================================
+pytest==8.3.4
+pytest-asyncio==0.24.0
+httpx==0.28.1                # HTTP client for testing
+
+# ================================
+# Development Tools (Optional)
+# ================================
+# black==24.10.0             # Code formatter
+# flake8==7.1.1              # Linter
+# mypy==1.13.0               # Type checker
+
