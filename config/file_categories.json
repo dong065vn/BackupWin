@@ -1,0 +1,86 @@
+{
+  "project_indicators": [
+    "package.json",
+    "requirements.txt",
+    "pom.xml",
+    "build.gradle",
+    "Cargo.toml",
+    "go.mod",
+    ".git",
+    "node_modules",
+    "venv",
+    "env"
+  ],
+  "categories": {
+    "Documents": {
+      "folder": "📄 Documents",
+      "extensions": [".pdf", ".doc", ".docx", ".txt", ".rtf", ".odt", ".pages"],
+      "description": "Text documents and PDFs"
+    },
+    "Spreadsheets": {
+      "folder": "📊 Spreadsheets",
+      "extensions": [".xls", ".xlsx", ".csv", ".ods", ".numbers"],
+      "description": "Excel and spreadsheet files"
+    },
+    "Presentations": {
+      "folder": "📽️ Presentations",
+      "extensions": [".ppt", ".pptx", ".key", ".odp"],
+      "description": "Presentation files"
+    },
+    "Images": {
+      "folder": "🖼️ Images",
+      "extensions": [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".svg", ".webp", ".ico", ".tiff", ".tif", ".heic"],
+      "description": "Image files"
+    },
+    "Videos": {
+      "folder": "🎥 Videos",
+      "extensions": [".mp4", ".avi", ".mkv", ".mov", ".wmv", ".flv", ".webm", ".m4v", ".mpeg", ".mpg"],
+      "description": "Video files"
+    },
+    "Audio": {
+      "folder": "🎵 Audio",
+      "extensions": [".mp3", ".wav", ".flac", ".aac", ".ogg", ".wma", ".m4a", ".opus"],
+      "description": "Audio and music files"
+    },
+    "Archives": {
+      "folder": "📦 Archives",
+      "extensions": [".zip", ".rar", ".7z", ".tar", ".gz", ".bz2", ".xz", ".iso"],
+      "description": "Compressed archives"
+    },
+    "Code_Projects": {
+      "folder": "💻 Code Projects",
+      "extensions": [".py", ".js", ".java", ".cpp", ".c", ".cs", ".php", ".rb", ".go", ".rs", ".swift", ".kt", ".ts", ".jsx", ".tsx", ".vue"],
+      "description": "Source code and development projects"
+    },
+    "Web_Files": {
+      "folder": "🌐 Web Files",
+      "extensions": [".html", ".htm", ".css", ".scss", ".sass", ".less"],
+      "description": "Web development files"
+    },
+    "Data_Files": {
+      "folder": "💾 Data Files",
+      "extensions": [".json", ".xml", ".yaml", ".yml", ".sql", ".db", ".sqlite"],
+      "description": "Data and configuration files"
+    },
+    "Executables": {
+      "folder": "⚙️ Executables",
+      "extensions": [".exe", ".msi", ".dmg", ".app", ".deb", ".rpm", ".apk"],
+      "description": "Executable and installer files"
+    },
+    "Fonts": {
+      "folder": "🔤 Fonts",
+      "extensions": [".ttf", ".otf", ".woff", ".woff2", ".eot"],
+      "description": "Font files"
+    },
+    "Design_Files": {
+      "folder": "🎨 Design Files",
+      "extensions": [".psd", ".ai", ".sketch", ".fig", ".xd", ".indd"],
+      "description": "Design and graphics project files"
+    },
+    "Others": {
+      "folder": "📁 Others",
+      "extensions": [],
+      "description": "Uncategorized files"
+    }
+  }
+}
