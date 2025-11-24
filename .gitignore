@@ -39,6 +39,10 @@ nul
 backups/
 temp/
 
+# Config files (keep template)
+config/
+!config/file_categories.json
+
 # PyInstaller spec files (keep only main one)
 *.spec
 !build_exe.spec

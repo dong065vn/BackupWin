@@ -243,4 +243,34 @@ Phát triển bằng:
     "duplicate_confirm_delete": "Xóa {count} file trùng?\n\nFile gốc sẽ được giữ lại:\n{kept}\n\nHành động này không thể hoàn tác!",
     "duplicate_delete_success": "Đã xóa: {deleted}\nThất bại: {failed}",
     "duplicate_move_success": "Đã di chuyển: {moved}\nThất bại: {failed}\n\nĐến: {destination}",
+
+    # File Organizer Tab
+    "tab_organizer": "Sắp Xếp File",
+    "organizer_title": "Tùy Chọn Sắp Xếp File",
+    "organizer_source": "Thư Mục Nguồn:",
+    "organizer_destination": "Thư Mục Đích:",
+    "organizer_options": "Tùy Chọn Sắp Xếp:",
+    "organizer_mode": "Chế Độ Thao Tác:",
+    "organizer_mode_copy": "Sao Chép (Giữ file gốc)",
+    "organizer_mode_move": "Di Chuyển (Xóa file gốc)",
+    "organizer_mode_delete": "Sao Chép rồi Xóa (Gửi vào thùng rác)",
+    "organizer_recursive": "Quét cả thư mục con",
+    "btn_organize": "Bắt Đầu Sắp Xếp",
+
+    # Organizer Stats
+    "organizer_organized": "File Đã Sắp Xếp",
+    "organizer_failed": "Thất Bại",
+    "organizer_categories": "Danh Mục Đã Dùng",
+    "organizer_log": "Nhật Ký Sắp Xếp",
+    "organizer_categories_breakdown": "Chi Tiết Theo Danh Mục",
+    "files": "file",
+
+    # Organizer Status
+    "status_organizing": "Đang sắp xếp file...",
+    "progress_organizing": "Đang sắp xếp... ({current}/{total})",
+
+    # Organizer Messages
+    "msg_confirm_organize": "Sắp xếp file?\n\nChế độ: {mode}\nNguồn: {source}\nĐích: {dest}\n\nĐiều này sẽ sắp xếp tất cả file vào các thư mục theo danh mục.",
+    "msg_organize_success": "Sắp xếp file hoàn tất thành công!",
+    "error_organize_failed": "Sắp xếp thất bại: {error}",
 }

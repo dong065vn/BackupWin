@@ -243,4 +243,34 @@ Developed with:
     "duplicate_confirm_delete": "Delete {count} duplicate file(s)?\n\nThe original file will be kept:\n{kept}\n\nThis action cannot be undone!",
     "duplicate_delete_success": "Deleted: {deleted}\nFailed: {failed}",
     "duplicate_move_success": "Moved: {moved}\nFailed: {failed}\n\nTo: {destination}",
+
+    # File Organizer Tab
+    "tab_organizer": "Organize Files",
+    "organizer_title": "File Organization Options",
+    "organizer_source": "Source Folder:",
+    "organizer_destination": "Destination Folder:",
+    "organizer_options": "Organization Options:",
+    "organizer_mode": "Operation Mode:",
+    "organizer_mode_copy": "Copy (Keep originals)",
+    "organizer_mode_move": "Move (Remove originals)",
+    "organizer_mode_delete": "Copy then Delete (Send to trash)",
+    "organizer_recursive": "Scan subdirectories",
+    "btn_organize": "Start Organization",
+
+    # Organizer Stats
+    "organizer_organized": "Files Organized",
+    "organizer_failed": "Failed",
+    "organizer_categories": "Categories Used",
+    "organizer_log": "Organization Log",
+    "organizer_categories_breakdown": "Categories Breakdown",
+    "files": "files",
+
+    # Organizer Status
+    "status_organizing": "Organizing files...",
+    "progress_organizing": "Organizing... ({current}/{total})",
+
+    # Organizer Messages
+    "msg_confirm_organize": "Organize files?\n\nMode: {mode}\nSource: {source}\nDestination: {dest}\n\nThis will organize all files into categorized folders.",
+    "msg_organize_success": "File organization completed successfully!",
+    "error_organize_failed": "Organization failed: {error}",
 }

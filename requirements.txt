@@ -31,6 +31,7 @@ python-magic-bin==0.4.14     # File type detection (Windows)
 tqdm==4.67.0                 # Progress bars
 aiofiles==24.1.0             # Async file operations
 filetype==1.2.0              # Advanced file type detection
+send2trash==1.8.3            # Safe file deletion (send to trash)
 
 # ================================
 # Cloud Storage (Optional)
