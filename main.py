@@ -1,4 +1,5 @@
 """Main application entry point"""
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.routes import router
@@ -6,13 +7,34 @@ from app.core.config import settings
 from app.core.logger import app_logger
 from app.core.database import init_db
 
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Application lifespan handler"""
+    # Startup
+    app_logger.info("Starting BackupWin API...")
+    try:
+        # Initialize database
+        init_db()
+        app_logger.info("Database initialized successfully")
+    except Exception as e:
+        app_logger.error(f"Error during startup: {e}")
+        raise
+
+    yield
+
+    # Shutdown
+    app_logger.info("Shutting down BackupWin API...")
+
+
 # Create FastAPI app
 app = FastAPI(
     title=settings.API_TITLE,
     version=settings.API_VERSION,
     description="BackupWin - Windows File Backup and Search API",
     docs_url="/docs",
-    redoc_url="/redoc"
+    redoc_url="/redoc",
+    lifespan=lifespan
 )
 
 # Add CORS middleware
@@ -24,27 +46,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Include API routes
-app.include_router(router)
-
-
-@app.on_event("startup")
-async def startup_event():
-    """Initialize application on startup"""
-    app_logger.info("Starting BackupWin API...")
-    try:
-        # Initialize database
-        init_db()
-        app_logger.info("Database initialized successfully")
-    except Exception as e:
-        app_logger.error(f"Error during startup: {e}")
-        raise
-
-
-@app.on_event("shutdown")
-async def shutdown_event():
-    """Cleanup on shutdown"""
-    app_logger.info("Shutting down BackupWin API...")
+# Include API routes with prefix
+app.include_router(router, prefix="/api/v1")
 
 
 @app.get("/")

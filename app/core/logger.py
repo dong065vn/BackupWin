@@ -24,6 +24,7 @@ def setup_logger():
             rotation="10 MB",
             retention="7 days",
             compression="zip",
+            encoding="utf-8",  # Use UTF-8 encoding for file output
             catch=True  # Prevent logger from crashing the app
         )
     except Exception as e:
@@ -33,8 +34,21 @@ def setup_logger():
     try:
         # Try to add console logger if stdout is available
         if sys.stdout is not None:
+            # On Windows, wrap stdout with UTF-8 encoding to handle Unicode characters
+            import io
+            if hasattr(sys.stdout, 'buffer'):
+                # Use UTF-8 encoding for console output on Windows
+                console_stream = io.TextIOWrapper(
+                    sys.stdout.buffer,
+                    encoding='utf-8',
+                    errors='replace',  # Replace unencodable chars instead of crashing
+                    line_buffering=True
+                )
+            else:
+                console_stream = sys.stdout
+
             logger.add(
-                sys.stdout,
+                console_stream,
                 format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>",
                 level=settings.LOG_LEVEL,
                 colorize=True,
@@ -54,6 +68,7 @@ def setup_logger():
                 fallback_log,
                 format="{time} | {level} | {message}",
                 level="INFO",
+                encoding="utf-8",
                 catch=True
             )
         except Exception:
