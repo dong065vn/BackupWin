@@ -18,6 +18,11 @@ class SearchTab(ctk.CTkFrame):
         self.search_service = FileSearchService()
         self.search_results = []
 
+        # Callbacks for sending results to other tabs
+        self.on_send_to_backup = None
+        self.on_send_to_consolidate = None
+        self.on_send_to_organizer = None
+
         self._create_widgets()
 
     def _create_widgets(self):
@@ -156,14 +161,45 @@ class SearchTab(ctk.CTkFrame):
         self.progress_card = ProgressCard(right_panel)
         self.progress_card.pack(fill="x", pady=10)
 
-        # Results table
+        # ========== ACTION BUTTONS (MOVED HERE - ABOVE TABLE) ==========
+        action_card = Card(right_panel, title="⚡ " + t("search_results") + " - Quick Actions")
+        action_card.pack(fill="x", pady=(0, 10))
+
+        # Button container inside action card
+        action_frame = ctk.CTkFrame(action_card, fg_color="transparent")
+        action_frame.pack(fill="x", padx=10, pady=10)
+
+        StyledButton(
+            action_frame,
+            text=t("btn_send_to_backup"),
+            command=self._send_to_backup,
+            variant="primary"
+        ).pack(side="left", padx=(0, 10))
+
+        StyledButton(
+            action_frame,
+            text=t("btn_send_to_consolidate"),
+            command=self._send_to_consolidate,
+            variant="success"
+        ).pack(side="left", padx=(0, 10))
+
+        StyledButton(
+            action_frame,
+            text=t("btn_send_to_organizer"),
+            command=self._send_to_organizer,
+            variant="primary"
+        ).pack(side="left")
+        # ============================================================
+
+        # Results table container
         results_card = Card(right_panel, title=t("search_results"))
         results_card.pack(fill="both", expand=True)
 
+        # Results table
         self.results_table = ResultsTable(
             results_card,
             columns=[t("col_file_name"), t("col_path"), t("col_size"), t("col_modified")],
-            height=400
+            height=350
         )
         self.results_table.pack(fill="both", expand=True, padx=10, pady=10)
 
@@ -312,3 +348,48 @@ class SearchTab(ctk.CTkFrame):
             )
         except Exception as e:
             messagebox.showerror(t("error"), t("error_get_drives", error=str(e)))
+
+    def _send_to_backup(self):
+        """Send search results to Backup tab"""
+        if not self.search_results:
+            messagebox.showwarning(t("warning"), t("msg_no_search_results"))
+            return
+
+        if self.on_send_to_backup:
+            # Extract file paths from search results
+            file_paths = [result['path'] for result in self.search_results]
+            self.on_send_to_backup(file_paths)
+            messagebox.showinfo(
+                t("info"),
+                t("msg_files_sent", count=len(file_paths), module=t("tab_backup"))
+            )
+
+    def _send_to_consolidate(self):
+        """Send search results to Consolidate tab"""
+        if not self.search_results:
+            messagebox.showwarning(t("warning"), t("msg_no_search_results"))
+            return
+
+        if self.on_send_to_consolidate:
+            # Extract file paths from search results
+            file_paths = [result['path'] for result in self.search_results]
+            self.on_send_to_consolidate(file_paths)
+            messagebox.showinfo(
+                t("info"),
+                t("msg_files_sent", count=len(file_paths), module=t("tab_consolidate"))
+            )
+
+    def _send_to_organizer(self):
+        """Send search results to Organizer tab"""
+        if not self.search_results:
+            messagebox.showwarning(t("warning"), t("msg_no_search_results"))
+            return
+
+        if self.on_send_to_organizer:
+            # Extract file paths from search results
+            file_paths = [result['path'] for result in self.search_results]
+            self.on_send_to_organizer(file_paths)
+            messagebox.showinfo(
+                t("info"),
+                t("msg_files_sent", count=len(file_paths), module=t("tab_organizer"))
+            )

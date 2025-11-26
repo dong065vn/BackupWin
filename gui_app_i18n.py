@@ -131,6 +131,37 @@ class BackupWinApp(ctk.CTk):
         self.tab_content.add_content(organizer_container)
         self.tab_content.add_content(restore_container)
 
+        # Connect tabs - setup callbacks for search tab to send data to other tabs
+        self._setup_tab_connections()
+
+    def _setup_tab_connections(self):
+        """Setup connections between tabs for data transfer"""
+        # Setup callbacks for search tab to send files to other tabs
+        self.search_tab.on_send_to_backup = self._handle_send_to_backup
+        self.search_tab.on_send_to_consolidate = self._handle_send_to_consolidate
+        self.search_tab.on_send_to_organizer = self._handle_send_to_organizer
+
+    def _handle_send_to_backup(self, file_paths: list):
+        """Handle sending files from search to backup tab"""
+        # Switch to backup tab (index 1)
+        self.tab_header.set_tab(1)
+        # Send files to backup tab
+        self.backup_tab.receive_files(file_paths)
+
+    def _handle_send_to_consolidate(self, file_paths: list):
+        """Handle sending files from search to consolidate tab"""
+        # Switch to consolidate tab (index 2)
+        self.tab_header.set_tab(2)
+        # Send files to consolidate tab
+        self.consolidate_tab.receive_files(file_paths)
+
+    def _handle_send_to_organizer(self, file_paths: list):
+        """Handle sending files from search to organizer tab"""
+        # Switch to organizer tab (index 4)
+        self.tab_header.set_tab(4)
+        # Send files to organizer tab
+        self.organizer_tab.receive_files(file_paths)
+
     def _on_tab_change(self, old_index: int, new_index: int):
         """Handle tab change event"""
         self.tab_content.show_content(new_index)

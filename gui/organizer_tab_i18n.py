@@ -272,3 +272,39 @@ class OrganizerTab(ctk.CTkFrame):
         """Add message to log"""
         self.log_text.insert("end", message)
         self.log_text.see("end")
+
+    def receive_files(self, file_paths: list):
+        """
+        Receive files from other tabs (e.g., Search tab)
+
+        Note: Organizer works on folders, not individual files.
+        This method will extract unique parent folders from the file list.
+
+        Args:
+            file_paths: List of file paths
+        """
+        if not file_paths:
+            return
+
+        # Extract unique parent folders
+        from pathlib import Path
+        parent_folders = set()
+        for file_path in file_paths:
+            parent_folder = str(Path(file_path).parent)
+            parent_folders.add(parent_folder)
+
+        if len(parent_folders) == 1:
+            # If all files are from the same folder, set it as source
+            folder = parent_folders.pop()
+            self.source_input.set(folder)
+            self._log(f"\n{t('info')}: Set source folder to {folder}\n")
+            self._log(f"Contains {len(file_paths)} file(s) from search\n")
+        else:
+            # If files are from multiple folders, notify user
+            messagebox.showinfo(
+                t("info"),
+                f"Files are from {len(parent_folders)} different folders.\n\n"
+                f"File Organizer works on entire folders.\n"
+                f"Please select a source folder manually."
+            )
+            self._log(f"\n{t('info')}: Received {len(file_paths)} files from {len(parent_folders)} folders\n")

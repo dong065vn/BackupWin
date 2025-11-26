@@ -477,6 +477,25 @@ class ConsolidateTab(ctk.CTkFrame):
             filename
         )
 
+    def receive_files(self, file_paths: list):
+        """
+        Receive files from other tabs (e.g., Search tab)
+
+        Args:
+            file_paths: List of file paths to consolidate
+        """
+        if not file_paths:
+            return
+
+        # Add all files to the list
+        for file_path in file_paths:
+            self._add_file_to_list(file_path)
+
+        messagebox.showinfo(
+            t("info"),
+            t("msg_files_added", count=len(file_paths))
+        )
+
 
 class FileListItem(ctk.CTkFrame):
     """Individual file item in the list"""

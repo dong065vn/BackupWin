@@ -45,6 +45,13 @@ vi = {
     "col_size": "Dung Lượng (MB)",
     "col_modified": "Ngày Sửa",
 
+    # Search Actions
+    "btn_send_to_backup": "📤 Gửi Sang Sao Lưu",
+    "btn_send_to_consolidate": "📤 Gửi Sang Tổng Hợp",
+    "btn_send_to_organizer": "📤 Gửi Sang Sắp Xếp",
+    "msg_no_search_results": "Không tìm thấy file nào. Vui lòng tìm kiếm trước!",
+    "msg_files_sent": "Đã gửi {count} file sang {module}!",
+
     # Backup Tab
     "backup_title": "Tùy Chọn Sao Lưu",
     "backup_mode": "Chế Độ Sao Lưu:",

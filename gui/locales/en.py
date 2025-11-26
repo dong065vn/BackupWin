@@ -45,6 +45,13 @@ en = {
     "col_size": "Size (MB)",
     "col_modified": "Modified",
 
+    # Search Actions
+    "btn_send_to_backup": "📤 Send to Backup",
+    "btn_send_to_consolidate": "📤 Send to Consolidate",
+    "btn_send_to_organizer": "📤 Send to Organizer",
+    "msg_no_search_results": "No files found. Please perform a search first!",
+    "msg_files_sent": "{count} file(s) sent to {module}!",
+
     # Backup Tab
     "backup_title": "Backup Options",
     "backup_mode": "Backup Mode:",

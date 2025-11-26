@@ -376,3 +376,28 @@ class BackupTab(ctk.CTkFrame):
         """Add message to log"""
         self.log_text.insert("end", message)
         self.log_text.see("end")
+
+    def receive_files(self, file_paths: list):
+        """
+        Receive files from other tabs (e.g., Search tab)
+
+        Args:
+            file_paths: List of file paths to backup
+        """
+        if not file_paths:
+            return
+
+        # Set mode to multiple files
+        self.backup_mode.set("files")
+        self._update_mode()
+
+        # Join file paths with semicolon separator
+        files_str = ";".join(file_paths)
+        self.source_input.set(files_str)
+
+        # Log the received files
+        self._log(f"\n{t('info')}: {t('msg_files_sent', count=len(file_paths), module=t('tab_backup'))}\n")
+        for i, path in enumerate(file_paths[:5], 1):  # Show first 5
+            self._log(f"  {i}. {path}\n")
+        if len(file_paths) > 5:
+            self._log(f"  ... and {len(file_paths) - 5} more files\n")

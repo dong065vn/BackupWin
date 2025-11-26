@@ -7,61 +7,23 @@ from app.schemas.backup import (
     BackupFileRequest,
 )
 
-from app.schemas.classification import (
-    FileClassificationCreate,
-    FileClassificationResponse,
-    FileClassificationUpdate,
-    ClassificationRuleCreate,
-    ClassificationRuleResponse,
-    ClassificationRuleUpdate,
-    ClassificationScanCreate,
-    ClassificationScanResponse,
-    ClassificationScanUpdate,
-    ClassificationStats,
-    ClassificationReport,
-    ScanRequest,
-    ScanStatusResponse,
-)
+# TODO: Create these schema files when implementing classification feature
+# from app.schemas.classification import (
+#     FileClassificationCreate,
+#     ...
+# )
 
-from app.schemas.tag import (
-    FileTagCreate,
-    FileTagResponse,
-    FileTagUpdate,
-    FileTagAssociationCreate,
-    FileTagAssociationResponse,
-    ApplyTagsRequest,
-    ApplyTagsResponse,
-    RemoveTagsRequest,
-    RemoveTagsResponse,
-    TagSearchRequest,
-    TagSearchResponse,
-    TagExportRequest,
-    TagExportResponse,
-    TagImportRequest,
-    TagImportResponse,
-    PopularTagsResponse,
-)
+# TODO: Create these schema files when implementing tag feature
+# from app.schemas.tag import (
+#     FileTagCreate,
+#     ...
+# )
 
-from app.schemas.organization import (
-    OrganizationActionCreate,
-    OrganizationActionResponse,
-    OrganizationActionUpdate,
-    OrganizationTemplateCreate,
-    OrganizationTemplateResponse,
-    OrganizationTemplateUpdate,
-    OrganizationPlanRequest,
-    OrganizationPlanResponse,
-    OrganizationExecuteRequest,
-    OrganizationExecuteResponse,
-    OrganizationPreviewRequest,
-    UndoActionRequest,
-    UndoActionResponse,
-    RollbackPlanRequest,
-    RollbackPlanResponse,
-    OrganizationHistoryRequest,
-    OrganizationHistoryResponse,
-    OrganizationStatistics,
-)
+# TODO: Create these schema files when implementing organization feature
+# from app.schemas.organization import (
+#     OrganizationActionCreate,
+#     ...
+# )
 
 __all__ = [
     # Backup schemas
@@ -70,54 +32,4 @@ __all__ = [
     "FileInfo",
     "SearchResponse",
     "BackupFileRequest",
-    # Classification schemas
-    "FileClassificationCreate",
-    "FileClassificationResponse",
-    "FileClassificationUpdate",
-    "ClassificationRuleCreate",
-    "ClassificationRuleResponse",
-    "ClassificationRuleUpdate",
-    "ClassificationScanCreate",
-    "ClassificationScanResponse",
-    "ClassificationScanUpdate",
-    "ClassificationStats",
-    "ClassificationReport",
-    "ScanRequest",
-    "ScanStatusResponse",
-    # Tag schemas
-    "FileTagCreate",
-    "FileTagResponse",
-    "FileTagUpdate",
-    "FileTagAssociationCreate",
-    "FileTagAssociationResponse",
-    "ApplyTagsRequest",
-    "ApplyTagsResponse",
-    "RemoveTagsRequest",
-    "RemoveTagsResponse",
-    "TagSearchRequest",
-    "TagSearchResponse",
-    "TagExportRequest",
-    "TagExportResponse",
-    "TagImportRequest",
-    "TagImportResponse",
-    "PopularTagsResponse",
-    # Organization schemas
-    "OrganizationActionCreate",
-    "OrganizationActionResponse",
-    "OrganizationActionUpdate",
-    "OrganizationTemplateCreate",
-    "OrganizationTemplateResponse",
-    "OrganizationTemplateUpdate",
-    "OrganizationPlanRequest",
-    "OrganizationPlanResponse",
-    "OrganizationExecuteRequest",
-    "OrganizationExecuteResponse",
-    "OrganizationPreviewRequest",
-    "UndoActionRequest",
-    "UndoActionResponse",
-    "RollbackPlanRequest",
-    "RollbackPlanResponse",
-    "OrganizationHistoryRequest",
-    "OrganizationHistoryResponse",
-    "OrganizationStatistics",
 ]
