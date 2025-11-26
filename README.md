@@ -194,10 +194,22 @@ LOG_LEVEL=INFO
 
 ## 📚 Documentation
 
-- [📖 GUI_USER_GUIDE.md](GUI_USER_GUIDE.md) - Complete user guide for desktop application
-- [📘 PROJECT_OVERVIEW.md](PROJECT_OVERVIEW.md) - Detailed technical documentation
-- [📋 BACKUP_FEATURE_TASK.md](BACKUP_FEATURE_TASK.md) - Feature implementation details
-- [🌐 API Docs](http://localhost:8000/docs) - Interactive API documentation (when server running)
+### Core Documentation
+- [📖 README](README.md) - Main project documentation (English)
+- [📖 README_VI](README_VI.md) - Vietnamese documentation
+- [📘 PROJECT_OVERVIEW](PROJECT_OVERVIEW.md) - Technical architecture & overview
+- [🤖 CLAUDE](CLAUDE.md) - AI assistant instructions
+
+### Feature Documentation
+- [🔄 Cross-Module Integration](docs/features/CROSS_MODULE_INTEGRATION.md) - Inter-module data transfer
+- [🐛 Bug Fixes Report](docs/features/BUG_FIXES_2025-11-26.md) - Latest bug fixes & improvements
+
+### User Guides
+- [🎯 Button Location Guide](docs/guides/BUTTON_LOCATION_GUIDE.md) - UI navigation help
+- [🎬 Demo Guide](docs/guides/DEMO_GUIDE.md) - Quick testing guide
+
+### API Documentation
+- [🌐 API Docs](http://localhost:8000/docs) - Interactive Swagger documentation (when server running)
 
 ## 🖥️ Desktop Application Guide
 
