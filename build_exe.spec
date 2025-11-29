@@ -9,6 +9,9 @@ a = Analysis(
     binaries=[],
     datas=[
         ('.env.example', '.'),
+        ('Cai dat phan mem', 'Cai dat phan mem'),
+        ('OFFICE, WINRAR, IDM', 'OFFICE, WINRAR, IDM'),
+        ('Sao luu du lieu', 'Sao luu du lieu'),
     ],
     hiddenimports=[
         # GUI
@@ -38,6 +41,8 @@ a = Analysis(
         'gui.restore_tab_i18n',
         'gui.consolidate_tab_i18n',
         'gui.duplicate_finder_tab_i18n',
+        'gui.organizer_tab_i18n',
+        'gui.resources_tab_i18n',
         'gui.components',
         'gui.styles',
         'gui.i18n',

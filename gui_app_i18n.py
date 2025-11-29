@@ -17,6 +17,7 @@ from gui.restore_tab_i18n import RestoreTab
 from gui.consolidate_tab_i18n import ConsolidateTab
 from gui.duplicate_finder_tab_i18n import DuplicateFinderTab
 from gui.organizer_tab_i18n import OrganizerTab
+from gui.resources_tab_i18n import ResourcesTab
 from gui.i18n import get_i18n, t
 from gui.tab_header import TabHeader, TabContent
 
@@ -61,6 +62,7 @@ class BackupWinApp(ctk.CTk):
             {"name": t("tab_consolidate"), "icon": "📁"},
             {"name": t("tab_duplicate_finder"), "icon": "🔄"},
             {"name": t("tab_organizer"), "icon": "🗂️"},
+            {"name": t("tab_resources"), "icon": "📦"},
             {"name": t("tab_restore"), "icon": "⚙️"}
         ]
 
@@ -102,6 +104,7 @@ class BackupWinApp(ctk.CTk):
         consolidate_container = ctk.CTkFrame(self.tab_content, fg_color="transparent")
         duplicate_container = ctk.CTkFrame(self.tab_content, fg_color="transparent")
         organizer_container = ctk.CTkFrame(self.tab_content, fg_color="transparent")
+        resources_container = ctk.CTkFrame(self.tab_content, fg_color="transparent")
         restore_container = ctk.CTkFrame(self.tab_content, fg_color="transparent")
 
         # Create tab widgets
@@ -120,6 +123,9 @@ class BackupWinApp(ctk.CTk):
         self.organizer_tab = OrganizerTab(organizer_container)
         self.organizer_tab.pack(fill="both", expand=True, padx=SPACE_XL, pady=SPACE_LG)
 
+        self.resources_tab = ResourcesTab(resources_container)
+        self.resources_tab.pack(fill="both", expand=True, padx=SPACE_XL, pady=SPACE_LG)
+
         self.restore_tab = RestoreTab(restore_container)
         self.restore_tab.pack(fill="both", expand=True, padx=SPACE_XL, pady=SPACE_LG)
 
@@ -129,6 +135,7 @@ class BackupWinApp(ctk.CTk):
         self.tab_content.add_content(consolidate_container)
         self.tab_content.add_content(duplicate_container)
         self.tab_content.add_content(organizer_container)
+        self.tab_content.add_content(resources_container)
         self.tab_content.add_content(restore_container)
 
         # Connect tabs - setup callbacks for search tab to send data to other tabs
