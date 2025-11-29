@@ -38,7 +38,7 @@ class ResourcesTab(ctk.CTkFrame):
             title_frame,
             text=t("resources_title"),
             font=(FONT_FAMILY, 24, "bold"),
-            text_color=TEXT_PRIMARY
+            text_color=TEXT_COLOR
         )
         title_label.pack(anchor="w")
 
@@ -54,7 +54,7 @@ class ResourcesTab(ctk.CTkFrame):
             category_inner,
             text=t("resources_category"),
             font=(FONT_FAMILY, 14, "bold"),
-            text_color=TEXT_PRIMARY
+            text_color=TEXT_COLOR
         )
         category_label.pack(side="left", padx=(0, SPACE_MD))
 
@@ -183,7 +183,7 @@ class ResourcesTab(ctk.CTkFrame):
             info_frame,
             text=f"📄 {file_path.name}",
             font=(FONT_FAMILY, 14, "bold"),
-            text_color=TEXT_PRIMARY,
+            text_color=TEXT_COLOR,
             anchor="w"
         )
         file_name_label.pack(anchor="w")

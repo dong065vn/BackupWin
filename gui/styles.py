@@ -20,6 +20,7 @@ ACCENT_HOVER = "#7c3aed"
 # Status Colors
 SUCCESS_COLOR = "#10b981"  # Modern green
 SUCCESS_LIGHT = "#d1fae5"
+ERROR_COLOR = "#ef4444"  # Modern red (alias for DANGER_COLOR)
 DANGER_COLOR = "#ef4444"  # Modern red
 DANGER_LIGHT = "#fee2e2"
 WARNING_COLOR = "#f59e0b"  # Modern orange
@@ -29,6 +30,7 @@ INFO_LIGHT = "#cffafe"
 
 # Background & Surface Colors
 BACKGROUND_COLOR = "#f8fafc"  # Light gray-blue
+BG_SECONDARY = "#f1f5f9"  # Secondary background
 CARD_BACKGROUND = "#ffffff"
 SURFACE_ELEVATED = "#ffffff"
 OVERLAY_BG = "rgba(0, 0, 0, 0.5)"
