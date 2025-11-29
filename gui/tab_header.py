@@ -30,26 +30,26 @@ class TabButton(ctk.CTkFrame):
             fg_color="transparent",
             cursor="hand2"
         )
-        self.button_container.grid(row=0, column=0, sticky="ew", padx=SPACE_XS, pady=0)
+        self.button_container.grid(row=0, column=0, sticky="ew", padx=2, pady=0)  # Minimal padding
 
         # Tab label with icon (compact)
         self.label = ctk.CTkLabel(
             self.button_container,
-            text=f"{icon}  {text}",
-            font=(FONT_FAMILY, 13, "normal"),
+            text=f"{icon} {text}",  # Single space between icon and text
+            font=(FONT_FAMILY, 12, "normal"),  # Smaller font
             text_color=TEXT_SECONDARY if not is_active else PRIMARY_COLOR,
             cursor="hand2"
         )
-        self.label.pack(pady=(SPACE_XS, SPACE_XXS))
+        self.label.pack(pady=(SPACE_XXS, SPACE_XXS))
 
         # Active indicator (animated underline)
         self.indicator = ctk.CTkFrame(
             self.button_container,
-            height=3,
+            height=2,  # Thinner indicator
             fg_color=PRIMARY_COLOR if is_active else "transparent",
             corner_radius=RADIUS_SM
         )
-        self.indicator.pack(fill="x", padx=SPACE_SM)
+        self.indicator.pack(fill="x", padx=SPACE_XS)
 
         # Bind events
         self._bind_events(self)
@@ -88,13 +88,13 @@ class TabButton(ctk.CTkFrame):
         if active:
             self.label.configure(
                 text_color=PRIMARY_COLOR,
-                font=(FONT_FAMILY, 13, "bold")
+                font=(FONT_FAMILY, 12, "bold")  # Smaller font
             )
             self.indicator.configure(fg_color=PRIMARY_COLOR)
         else:
             self.label.configure(
                 text_color=TEXT_SECONDARY,
-                font=(FONT_FAMILY, 13, "normal")
+                font=(FONT_FAMILY, 12, "normal")  # Smaller font
             )
             self.indicator.configure(fg_color="transparent")
 
@@ -191,8 +191,8 @@ class TabHeader(ctk.CTkFrame):
 
     def _create_tabs_section(self):
         """Create compact tabs navigation"""
-        tabs_frame = ctk.CTkFrame(self, fg_color="transparent", height=44)
-        tabs_frame.grid(row=1, column=0, sticky="ew", padx=SPACE_LG, pady=0)
+        tabs_frame = ctk.CTkFrame(self, fg_color="transparent", height=38)  # Reduced height
+        tabs_frame.grid(row=1, column=0, sticky="ew", padx=SPACE_MD, pady=0)  # Reduced padding
         tabs_frame.grid_propagate(False)
 
         # Create tab buttons
@@ -205,7 +205,7 @@ class TabHeader(ctk.CTkFrame):
                 on_click=self._handle_tab_click,
                 is_active=(i == 0)
             )
-            tab_btn.pack(side="left", padx=0)
+            tab_btn.pack(side="left", padx=0, fill="y", expand=True)  # Equal width distribution
             self.tab_buttons.append(tab_btn)
 
     def _create_divider(self):
