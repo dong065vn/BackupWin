@@ -9,6 +9,7 @@ a = Analysis(
     binaries=[],
     datas=[
         ('.env.example', '.'),
+        ('config/file_categories.json', 'config'),
         ('Cai dat phan mem', 'Cai dat phan mem'),
         ('OFFICE, WINRAR, IDM', 'OFFICE, WINRAR, IDM'),
         ('Sao luu du lieu', 'Sao luu du lieu'),
