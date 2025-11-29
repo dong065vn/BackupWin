@@ -1,319 +1,381 @@
-# BackupWin
+# BackupWin - File Backup & Management Tool
 
-A comprehensive Windows file backup and search application with both Desktop GUI and RESTful API.
+> Ứng dụng sao lưu và quản lý file chuyên nghiệp cho Windows
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 ![Python](https://img.shields.io/badge/python-3.8+-green)
-![Platform](https://img.shields.io/badge/platform-Windows-lightgrey)
+![License](https://img.shields.io/badge/license-Proprietary-red)
 
-## 🎯 Features at a Glance
+## 📋 Tổng Quan
 
-- 🖥️ **Beautiful Desktop GUI** - User-friendly interface built with CustomTkinter
-- 🔍 **Smart File Search** - Find files across all drives with pattern matching
-- 💾 **Reliable Backup** - Backup files with MD5 checksum verification
-- ♻️ **Easy Restore** - Restore files and manage backups effortlessly
-- 🌐 **REST API** - Full-featured API for automation and integration
-- 📊 **PostgreSQL Database** - Track all backup operations and history
+BackupWin là ứng dụng desktop chuyên nghiệp cho Windows, cung cấp giải pháp toàn diện cho việc sao lưu, tìm kiếm, và quản lý file. Với giao diện hiện đại và nhiều tính năng mạnh mẽ, BackupWin giúp bạn quản lý dữ liệu một cách dễ dàng và hiệu quả.
 
-## 🚀 Quick Start
+### ✨ Tính Năng Chính
 
-### ⚡ Super Quick Start (Easiest!)
+- **🔍 Tìm Kiếm File** - Tìm kiếm nhanh trên toàn bộ ổ đĩa
+- **💾 Sao Lưu** - Sao lưu file/folder với nhiều tùy chọn
+- **📁 Gộp File** - Tổng hợp file từ nhiều nguồn
+- **🔄 Tìm File Trùng** - Phát hiện và xóa file trùng lặp
+- **🗂️ Sắp Xếp File** - Tự động phân loại file theo danh mục
+- **📦 Tài Nguyên** - Quản lý công cụ và phần mềm tích hợp
+- **⚙️ Khôi Phục** - Khôi phục và quản lý bản sao lưu
 
-**For English:**
-- **Double-click** `run_gui_english.bat`
+### 🌍 Đa Ngôn Ngữ
 
-**For Vietnamese (Tiếng Việt):**
-- **Double-click** `run_gui_vietnamese.bat`
+- Tiếng Việt
+- English
 
-**First time setup:**
-1. **Double-click** `QUICK_START.bat`
-2. Choose option 1 (Install and Run)
-3. Wait for installation and the GUI will open automatically!
+## 🚀 Cài Đặt & Sử Dụng
 
-### Option 2: API Server (For Developers)
+### Cách 1: Chạy File EXE (Đơn Giản)
 
-**Prerequisites:**
-- Python 3.8 or higher
-- PostgreSQL database
-- Windows operating system
+1. Tải file `BackupWin.exe` (26 MB)
+2. Double-click để chạy
+3. Không cần cài đặt Python hay dependencies
 
-**Installation:**
+### Cách 2: Chạy Từ Source Code (Developer)
 
-1. Clone or download the project
+**Yêu cầu:**
+- Python 3.8 trở lên
+- Windows 10/11
 
-2. Create virtual environment:
+**Các bước:**
+
 ```bash
+# 1. Clone repository
+git clone <repository-url>
+cd BackupWin
+
+# 2. Tạo virtual environment
 python -m venv venv
-```
 
-3. Activate virtual environment:
-```bash
-# Windows Command Prompt
+# 3. Kích hoạt virtual environment
 venv\Scripts\activate
 
-# Windows PowerShell
-venv\Scripts\Activate.ps1
-
-# Git Bash
-source venv/Scripts/activate
-```
-
-4. Install dependencies:
-```bash
+# 4. Cài đặt dependencies
 pip install -r requirements.txt
+
+# 5. Chạy ứng dụng
+python gui_app_i18n.py
 ```
 
-5. Configure environment:
+## 📦 Build EXE
+
+Để build file EXE từ source code:
+
 ```bash
-# Copy example environment file
-copy .env.example .env
+# Kích hoạt virtual environment
+venv\Scripts\activate
 
-# Edit .env file with your settings
-notepad .env
+# Build EXE
+pyinstaller build_exe.spec --clean --noconfirm
+
+# File output: dist/BackupWin.exe
 ```
 
-6. Start the API server:
-```bash
-python main.py
-```
+## 🎯 Hướng Dẫn Sử Dụng
 
-7. Open API documentation:
-- Swagger UI: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc
+### 1. Tìm Kiếm File
 
-## Features
+1. Mở tab **"🔍 Tìm Kiếm File"**
+2. Chọn đường dẫn tìm kiếm hoặc tìm trên tất cả ổ đĩa
+3. Nhập pattern tìm kiếm (VD: `*.pdf`, `report_*`)
+4. Click **"Tìm Kiếm"**
+5. Kết quả hiển thị với tên, đường dẫn, kích thước
+6. Có thể gửi kết quả sang các module khác
 
-### File Search
-- Search files across all Windows drives
-- Pattern matching with wildcards (*, ?)
-- Filter by file extension
-- Recursive and non-recursive search
-- Calculate folder sizes
+### 2. Sao Lưu File
 
-### Backup Operations
-- Backup single or multiple files
-- Backup entire folders with filters
-- Checksum verification (MD5)
-- Preserve directory structure
-- Custom backup destinations
-- Restore files from backups
-- List and manage backups
+1. Mở tab **"💾 Sao Lưu File"**
+2. Chọn chế độ: File đơn / Nhiều file / Toàn bộ thư mục
+3. Chọn nguồn cần sao lưu
+4. Chọn đích (hoặc để mặc định)
+5. Tùy chọn: Giữ cấu trúc, tạo checksum
+6. Click **"Bắt Đầu Sao Lưu"**
 
-### API
-- RESTful API with FastAPI
-- Automatic API documentation (Swagger)
-- Request/response validation
-- CORS support
-- Comprehensive error handling
+### 3. Gộp File
 
-## API Examples
+1. Mở tab **"📁 Gộp File"**
+2. Thêm file từ nhiều nguồn khác nhau
+3. Chọn thư mục đích
+4. Chọn chế độ: Copy hoặc Move
+5. Xử lý file trùng: Skip / Rename / Overwrite
+6. Click **"Bắt Đầu Gộp File"**
 
-### Get Available Drives
-```bash
-curl http://localhost:8000/api/v1/drives
-```
+### 4. Tìm File Trùng
 
-### Search for Files
-```bash
-curl -X POST http://localhost:8000/api/v1/search \
-  -H "Content-Type: application/json" \
-  -d "{\"search_path\": \"C:\\\\\", \"file_pattern\": \"*.pdf\", \"max_results\": 10}"
-```
+1. Mở tab **"🔄 Tìm File Trùng"**
+2. Thêm các thư mục cần quét
+3. Chọn phương pháp so sánh
+4. Click **"Bắt Đầu Quét"**
+5. Xem kết quả với nhóm file trùng
+6. Xóa hoặc di chuyển file trùng
 
-### Backup a File
-```bash
-curl -X POST http://localhost:8000/api/v1/backup/file \
-  -H "Content-Type: application/json" \
-  -d "{\"source_file\": \"C:\\\\important.pdf\"}"
-```
+### 5. Sắp Xếp File
 
-### Backup a Folder
-```bash
-curl -X POST http://localhost:8000/api/v1/backup/folder \
-  -H "Content-Type: application/json" \
-  -d "{\"source_folder\": \"C:\\\\MyDocuments\", \"file_extensions\": [\".pdf\", \".docx\"]}"
-```
+1. Mở tab **"🗂️ Sắp Xếp File"**
+2. Chọn thư mục nguồn
+3. Chọn thư mục đích
+4. Chọn chế độ: Copy / Move / Delete
+5. Click **"Bắt Đầu Sắp Xếp"**
+6. File tự động phân loại vào các thư mục
 
-### List Backups
-```bash
-curl http://localhost:8000/api/v1/backups
-```
+### 6. Tài Nguyên
 
-## Testing
+1. Mở tab **"📦 Tài Nguyên"**
+2. Chọn danh mục:
+   - **Cài Đặt Phần Mềm** - Công cụ cài đặt tự động
+   - **Office & Công Cụ** - 7-Zip, Office scripts, WinRAR key
+   - **Công Cụ Sao Lưu** - Backup utility
+3. Mỗi file có 3 thao tác:
+   - 📂 Mở vị trí
+   - ▶️ Chạy file (.exe, .bat)
+   - 📋 Copy lên Desktop
 
-Run tests with pytest:
-```bash
-# Run all tests
-pytest
+### 7. Khôi Phục & Quản Lý
 
-# Run with verbose output
-pytest -v
+1. Mở tab **"⚙️ Khôi Phục & Quản Lý"**
+2. Xem danh sách bản sao lưu
+3. Chọn bản cần khôi phục
+4. Chọn vị trí khôi phục
+5. Click **"Khôi Phục File"**
 
-# Run specific test file
-pytest tests/test_backup.py
-
-# Run with coverage
-pytest --cov=app
-```
-
-## Project Structure
+## 📂 Cấu Trúc Dự Án
 
 ```
 BackupWin/
-├── app/                    # Main application package
-│   ├── api/               # API routes
-│   ├── core/              # Configuration, database, logging
-│   ├── models/            # Database models
-│   ├── schemas/           # Pydantic schemas
-│   └── services/          # Business logic
-├── tests/                 # Test suite
-├── logs/                  # Application logs
-├── main.py               # Application entry point
-├── requirements.txt      # Python dependencies
-└── .env                  # Environment configuration
+├── app/                          # Backend logic
+│   ├── core/                     # Core modules
+│   │   ├── config.py            # Configuration
+│   │   └── logger.py            # Logging
+│   └── services/                # Business logic
+│       ├── backup.py            # Backup service
+│       ├── file_search.py       # Search service
+│       ├── file_consolidation.py # Consolidation
+│       ├── duplicate_finder.py  # Duplicate detection
+│       └── file_organizer.py    # File organization
+│
+├── gui/                          # Frontend GUI
+│   ├── locales/                 # Translations
+│   │   ├── en.py               # English
+│   │   └── vi.py               # Vietnamese
+│   ├── backup_tab_i18n.py      # Backup tab
+│   ├── consolidate_tab_i18n.py # Consolidate tab
+│   ├── duplicate_finder_tab_i18n.py # Duplicate tab
+│   ├── organizer_tab_i18n.py   # Organizer tab
+│   ├── resources_tab_i18n.py   # Resources tab
+│   ├── restore_tab_i18n.py     # Restore tab
+│   ├── search_tab_i18n.py      # Search tab
+│   ├── components.py            # Reusable components
+│   ├── i18n.py                  # i18n handler
+│   ├── styles.py                # UI styles
+│   └── tab_header.py            # Tab header
+│
+├── config/                       # Configuration files
+│   └── file_categories.json    # File categories
+│
+├── Cai dat phan mem/            # Software installer
+│   └── Cai dat phan mem.exe
+│
+├── OFFICE, WINRAR, IDM/         # Office tools
+│   ├── 7z.dll, 7z.exe
+│   ├── Main.bat
+│   ├── O10OSPP.VBS, O16OSPP.VBS
+│   ├── rarreg.key
+│   └── SLERROR.XML
+│
+├── Sao luu du lieu/             # Backup utility
+│   └── Sao luu du lieu.exe
+│
+├── dist/                         # Build output
+│   └── BackupWin.exe            # Executable (26 MB)
+│
+├── .env.example                  # Environment template
+├── build_exe.spec               # PyInstaller spec
+├── gui_app_i18n.py              # Main entry point
+├── requirements.txt             # Dependencies
+└── README.md                     # This file
 ```
 
-## Configuration
+## 🛠️ Dependencies
 
-Edit `.env` file to configure:
+### Core
+- **Python 3.8+**
+- **customtkinter** - Modern UI framework
+- **Pillow** - Image processing
+- **pydantic** - Data validation
+
+### Services
+- **loguru** - Advanced logging
+- **send2trash** - Safe file deletion
+- **python-dotenv** - Environment management
+
+### Build
+- **pyinstaller** - EXE builder
+
+Xem file `requirements.txt` để biết chi tiết đầy đủ.
+
+## 📊 Thông Tin Build
+
+### BackupWin.exe (26 MB)
+
+```
+Composition:
+├── Python Runtime       14 MB  (54%)
+├── Dependencies         8 MB   (31%)
+├── Resource Files       4 MB   (15%)
+└── Application Code     500 KB
+```
+
+### Resource Files (9 files - 4.05 MB)
+
+**Cai dat phan mem/** (1 file - 1.13 MB)
+- Cai dat phan mem.exe
+
+**OFFICE, WINRAR, IDM/** (7 files - 1.62 MB)
+- 7z.dll, 7z.exe
+- Main.bat
+- O10OSPP.VBS, O16OSPP.VBS
+- rarreg.key
+- SLERROR.XML
+
+**Sao luu du lieu/** (1 file - 1.30 MB)
+- Sao luu du lieu.exe
+
+## 🔧 Configuration
+
+### File Categories (config/file_categories.json)
+
+File Organizer tự động phân loại file theo các danh mục:
+
+- **Documents** - PDF, Word, Excel, PowerPoint
+- **Images** - JPG, PNG, GIF, SVG
+- **Videos** - MP4, AVI, MKV
+- **Music** - MP3, WAV, FLAC
+- **Archives** - ZIP, RAR, 7Z
+- **Code Projects** - Auto-detect project folders
+- **Others** - Các file khác
+
+### Environment Variables (.env)
 
 ```env
-# Database
-DATABASE_URL=postgresql://user:password@localhost:5432/backupwin_db
-
-# API
-API_HOST=0.0.0.0
-API_PORT=8000
-
-# Backup
-DEFAULT_BACKUP_PATH=C:\Backups
-
-# Logging
-LOG_LEVEL=INFO
+DATABASE_URL=             # PostgreSQL connection (optional)
+OPENROUTER_API_KEY=      # AI features (future)
 ```
 
-## 📚 Documentation
+## 🎨 UI Features
 
-### Core Documentation
-- [📖 README](README.md) - Main project documentation (English)
-- [📖 README_VI](README_VI.md) - Vietnamese documentation
-- [📘 PROJECT_OVERVIEW](PROJECT_OVERVIEW.md) - Technical architecture & overview
-- [🤖 CLAUDE](CLAUDE.md) - AI assistant instructions
+### Modern Design
+- Clean Figma-inspired interface
+- Professional card-based layout
+- Smooth tab transitions
+- Optimized for 7 tabs without overlap
 
-### Feature Documentation
-- [🔄 Cross-Module Integration](docs/features/CROSS_MODULE_INTEGRATION.md) - Inter-module data transfer
-- [🐛 Bug Fixes Report](docs/features/BUG_FIXES_2025-11-26.md) - Latest bug fixes & improvements
+### Responsive
+- Auto-adjust to screen size
+- Even tab distribution
+- Compact spacing
 
-### User Guides
-- [🎯 Button Location Guide](docs/guides/BUTTON_LOCATION_GUIDE.md) - UI navigation help
-- [🎬 Demo Guide](docs/guides/DEMO_GUIDE.md) - Quick testing guide
+### Dark/Light Mode
+- Currently: Light mode
+- Easy to extend for dark mode
 
-### API Documentation
-- [🌐 API Docs](http://localhost:8000/docs) - Interactive Swagger documentation (when server running)
+## 🔐 Security
 
-## 🖥️ Desktop Application Guide
+### Best Practices
+- ✅ Safe file deletion (trash bin)
+- ✅ Checksum verification (MD5)
+- ✅ Confirmation dialogs for destructive actions
+- ✅ No automatic file execution
+- ✅ Temp files auto-cleanup on exit
 
-### Main Features
+### Resource Files
+- Extracted to temp folder at runtime
+- Read-only access
+- Auto-delete when app closes
+- No persistent modification
 
-#### 1. 🔍 Search Files Tab
-- Search in specific folders or across all drives
-- Use wildcards: `*.pdf`, `report_*`, `test_?.txt`
-- Filter by file extension
-- View file details (name, path, size, date)
-- Export search results
+## 🐛 Troubleshooting
 
-#### 2. 💾 Backup Files Tab
-**Three Backup Modes:**
-- **Single File** - Backup one file
-- **Multiple Files** - Backup several files at once
-- **Entire Folder** - Backup complete folders with filters
+### Ứng dụng không chạy
+**Giải pháp:**
+1. Kiểm tra Windows version (Windows 10/11)
+2. Disable antivirus tạm thời
+3. Chạy as Administrator
+4. Download lại file EXE
 
-**Features:**
-- Preserve directory structure
-- MD5 checksum verification
-- Custom backup destinations
-- Progress tracking
-- Detailed backup logs
+### File không tìm thấy trong Resources
+**Giải pháp:**
+1. Restart ứng dụng
+2. Check folder tồn tại trong build
+3. Rebuild từ source code
 
-#### 3. ♻️ Restore & Manage Tab
-- View all available backups
-- Restore files with integrity verification
-- Manage backups (open folder, delete)
-- Filter backups by date
-- See backup statistics
+### Lỗi "Module not found"
+**Giải pháp (Source code):**
+```bash
+pip install -r requirements.txt --force-reinstall
+```
 
-### Building Standalone Executable
+### Build lỗi
+**Giải pháp:**
+```bash
+# Clean và rebuild
+rm -rf build dist
+pyinstaller build_exe.spec --clean --noconfirm
+```
 
-Create a portable .exe file that runs without Python:
+## 📝 Development
+
+### Coding Standards
+- Python 3.8+ syntax
+- Type hints encouraged
+- Docstrings for functions
+- Error handling required
+
+### Adding New Features
+
+1. **Backend Service** - Thêm vào `app/services/`
+2. **GUI Tab** - Thêm vào `gui/`
+3. **Translations** - Update `gui/locales/vi.py` và `en.py`
+4. **Integration** - Import trong `gui_app_i18n.py`
+
+### Testing
 
 ```bash
-# Run the build script
-build_exe.bat
+# Run from source
+python gui_app_i18n.py
+
+# Test specific module
+python -m app.services.backup
+
+# Build and test
+pyinstaller build_exe.spec --clean
+./dist/BackupWin.exe
 ```
 
-The executable will be created in `dist\BackupWin.exe`
+## 🔄 Version History
 
-**Advantages:**
-- No Python installation required
-- Single file distribution
-- Faster startup time
-- Can be run from USB drive
+### v1.0.0 (2025-11-29)
+- ✨ Initial release
+- ✅ 7 functional modules
+- ✅ Multi-language support
+- ✅ 9 resource files integrated
+- ✅ Modern optimized UI
+- ✅ Complete documentation
 
-## 🔧 Available Scripts
+## 📞 Support
 
-| Script | Description |
-|--------|-------------|
-| `QUICK_START.bat` | Quick start menu with all options |
-| `run_gui_english.bat` | Launch GUI in English |
-| `run_gui_vietnamese.bat` | Launch GUI in Vietnamese (Tiếng Việt) |
+Nếu gặp vấn đề hoặc cần hỗ trợ:
+1. Check Troubleshooting section
+2. Review logs trong `logs/app.log`
+3. Contact developer
 
-## ❗ Troubleshooting
+## 📄 License
 
-### "ModuleNotFoundError: No module named 'customtkinter'"
+© 2025 BackupWin - All rights reserved.
 
-**Solution:**
-1. Run `install_gui_deps.bat`
-2. Wait for installation to complete
-3. Run `run_gui.bat` again
+Proprietary software - Unauthorized distribution prohibited.
 
-### Python not found
-**Solution:**
-1. Download Python 3.8+ from [python.org](https://www.python.org/downloads/)
-2. During installation, **CHECK** ☑ "Add Python to PATH"
-3. Restart your computer
-4. Run `install_gui_deps.bat`
+---
 
-### Application won't start
-**Solution:**
-1. Delete the `venv` folder
-2. Run `install_gui_deps.bat`
-3. Run `run_gui.bat`
-
-### Build executable fails
-**Solution:**
-```bash
-# Clean and rebuild
-rmdir /s /q build
-rmdir /s /q dist
-pip install --upgrade pyinstaller
-build_exe.bat
-```
-
-### Database connection error (API only)
-- Ensure PostgreSQL is installed and running
-- Verify DATABASE_URL in .env file
-- Create the database if it doesn't exist
-- **Note:** GUI app works WITHOUT database
-
-### Permission errors during search
-- Some system folders require administrator access
-- The application will skip inaccessible files
-- Run as administrator if needed
-
-## License
-
-This project is provided as-is for educational and personal use.
-
-## Support
-
-For issues, questions, or contributions, please refer to the project documentation.
+**BackupWin** - Your Complete File Management Solution 🚀
