@@ -97,4 +97,6 @@ exe = EXE(
     codesign_identity=None,
     entitlements_file=None,
     icon=None,  # Add icon file here if you have one
+    uac_admin=True,  # Request admin privileges
+    uac_uiaccess=False,
 )

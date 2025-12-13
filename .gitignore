@@ -11,7 +11,7 @@ ENV/
 dist/
 build/
 
-# Environment variables
+# Environment
 .env
 .env.local
 
@@ -21,27 +21,30 @@ build/
 
 # Logs
 *.log
-logs/*.log
-server.log
+logs/
 
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
+.claude/
 
 # OS
 .DS_Store
 Thumbs.db
-nul
 
 # Backup files
 backups/
 temp/
 
-# PyInstaller spec files (keep only main one)
+# PyInstaller
 *.spec
 !build_exe.spec
 
-# Language config (auto-generated)
+# Auto-generated
 .language_config.json
+
+# Cache
+.pytest_cache/
+migrations/

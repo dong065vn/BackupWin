@@ -1,229 +1,119 @@
 """API routes for BackupWin application"""
 from fastapi import APIRouter, HTTPException, BackgroundTasks
-from typing import List
 import time
-from app.schemas.backup import (
-    SearchRequest, SearchResponse, FileInfo, SearchMultipleDrivesRequest,
-    BackupFileRequest, BackupFilesRequest, BackupFolderRequest,
-    BackupResponse, RestoreFileRequest, ListBackupsResponse, BackupInfo,
-    DrivesResponse, FolderSizeResponse
-)
+from app.schemas.backup import *
 from app.services.file_search import FileSearchService
 from app.services.backup import BackupService
 from app.core.logger import app_logger
 
 router = APIRouter()
-
-# Initialize services
 file_search_service = FileSearchService()
 backup_service = BackupService()
 
 
-# Search Endpoints
 @router.get("/drives", response_model=DrivesResponse, tags=["Search"])
 async def get_available_drives():
-    """Get all available drives on Windows system"""
     try:
-        drives = file_search_service.get_available_drives()
-        return DrivesResponse(success=True, drives=drives)
+        return DrivesResponse(success=True, drives=file_search_service.get_available_drives())
     except Exception as e:
-        app_logger.error(f"Error getting drives: {e}")
+        app_logger.error(f"Get drives error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.post("/search", response_model=SearchResponse, tags=["Search"])
 async def search_files(request: SearchRequest):
-    """Search for files in specified path"""
     try:
-        start_time = time.time()
-        files = []
-
-        for file_info in file_search_service.search_files(
-            search_path=request.search_path,
-            file_pattern=request.file_pattern,
-            file_extension=request.file_extension,
-            recursive=request.recursive,
-            max_results=request.max_results,
-            case_sensitive=request.case_sensitive
-        ):
-            files.append(FileInfo(**file_info))
-
-        duration = time.time() - start_time
-
-        return SearchResponse(
-            success=True,
-            results_count=len(files),
-            files=files,
-            search_duration_seconds=round(duration, 2)
-        )
+        start = time.time()
+        files = [FileInfo(**f) for f in file_search_service.search_files(
+            request.search_path, request.file_pattern, request.file_extension,
+            request.recursive, request.max_results, request.case_sensitive)]
+        return SearchResponse(success=True, results_count=len(files), files=files, search_duration_seconds=round(time.time() - start, 2))
     except Exception as e:
-        app_logger.error(f"Error searching files: {e}")
+        app_logger.error(f"Search error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.post("/search/all-drives", response_model=SearchResponse, tags=["Search"])
 async def search_in_all_drives(request: SearchMultipleDrivesRequest):
-    """Search for files across all available drives"""
     try:
-        start_time = time.time()
-        files = []
-
-        for file_info in file_search_service.search_in_multiple_drives(
-            file_pattern=request.file_pattern,
-            file_extension=request.file_extension,
-            exclude_drives=request.exclude_drives,
-            max_results_per_drive=request.max_results_per_drive
-        ):
-            files.append(FileInfo(**file_info))
-
-        duration = time.time() - start_time
-
-        return SearchResponse(
-            success=True,
-            results_count=len(files),
-            files=files,
-            search_duration_seconds=round(duration, 2)
-        )
+        start = time.time()
+        files = [FileInfo(**f) for f in file_search_service.search_in_multiple_drives(
+            request.file_pattern, request.file_extension, request.exclude_drives, request.max_results_per_drive)]
+        return SearchResponse(success=True, results_count=len(files), files=files, search_duration_seconds=round(time.time() - start, 2))
     except Exception as e:
-        app_logger.error(f"Error searching all drives: {e}")
+        app_logger.error(f"Search all drives error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.get("/folder-size", response_model=FolderSizeResponse, tags=["Search"])
 async def get_folder_size(folder_path: str):
-    """Calculate total size of a folder"""
     try:
-        result = file_search_service.get_folder_size(folder_path)
-        return FolderSizeResponse(
-            success=True,
-            path=result["path"],
-            total_size_mb=result["total_size_mb"],
-            total_size_gb=result["total_size_gb"],
-            file_count=result["file_count"]
-        )
+        r = file_search_service.get_folder_size(folder_path)
+        return FolderSizeResponse(success=True, path=r["path"], total_size_mb=r["total_size_mb"], total_size_gb=r["total_size_gb"], file_count=r["file_count"])
     except Exception as e:
-        app_logger.error(f"Error getting folder size: {e}")
+        app_logger.error(f"Folder size error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
-# Backup Endpoints
 @router.post("/backup/file", response_model=BackupResponse, tags=["Backup"])
 async def backup_file(request: BackupFileRequest):
-    """Backup a single file"""
     try:
-        result = backup_service.backup_file(
-            source_file=request.source_file,
-            destination_folder=request.destination_folder,
-            preserve_structure=request.preserve_structure,
-            create_checksum=request.create_checksum
-        )
-
-        if not result["success"]:
-            return BackupResponse(success=False, error=result.get("error"))
-
-        return BackupResponse(
-            success=True,
-            total_files=1,
-            successful=1,
-            failed=0,
-            total_size_mb=result["size_mb"],
-            files=[result]
-        )
+        r = backup_service.backup_file(request.source_file, request.destination_folder, request.preserve_structure, request.create_checksum)
+        return BackupResponse(success=r["success"], total_files=1, successful=1 if r["success"] else 0, failed=0 if r["success"] else 1,
+                             total_size_mb=r.get("size_mb", 0), files=[r] if r["success"] else [], error=r.get("error"))
     except Exception as e:
-        app_logger.error(f"Error backing up file: {e}")
+        app_logger.error(f"Backup file error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.post("/backup/files", response_model=BackupResponse, tags=["Backup"])
 async def backup_files(request: BackupFilesRequest, background_tasks: BackgroundTasks):
-    """Backup multiple files"""
     try:
-        result = backup_service.backup_files(
-            source_files=request.source_files,
-            destination_folder=request.destination_folder,
-            preserve_structure=request.preserve_structure
-        )
-
-        return BackupResponse(**result)
+        return BackupResponse(**backup_service.backup_files(request.source_files, request.destination_folder, request.preserve_structure))
     except Exception as e:
-        app_logger.error(f"Error backing up files: {e}")
+        app_logger.error(f"Backup files error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.post("/backup/folder", response_model=BackupResponse, tags=["Backup"])
 async def backup_folder(request: BackupFolderRequest):
-    """Backup entire folder"""
     try:
-        result = backup_service.backup_folder(
-            source_folder=request.source_folder,
-            destination_folder=request.destination_folder,
-            file_extensions=request.file_extensions,
-            exclude_patterns=request.exclude_patterns
-        )
-
-        if "error" in result:
-            return BackupResponse(success=False, error=result["error"])
-
-        return BackupResponse(**result)
+        r = backup_service.backup_folder(request.source_folder, request.destination_folder, request.file_extensions, request.exclude_patterns)
+        return BackupResponse(**r) if "error" not in r else BackupResponse(success=False, error=r["error"])
     except Exception as e:
-        app_logger.error(f"Error backing up folder: {e}")
+        app_logger.error(f"Backup folder error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.post("/restore", response_model=BackupResponse, tags=["Backup"])
 async def restore_file(request: RestoreFileRequest):
-    """Restore a file from backup"""
     try:
-        result = backup_service.restore_file(
-            backup_file=request.backup_file,
-            destination=request.destination,
-            verify_checksum=request.verify_checksum
-        )
-
-        if not result["success"]:
-            return BackupResponse(success=False, error=result.get("error"))
-
-        return BackupResponse(success=True)
+        r = backup_service.restore_file(request.backup_file, request.destination, request.verify_checksum)
+        return BackupResponse(success=r["success"], error=r.get("error"))
     except Exception as e:
-        app_logger.error(f"Error restoring file: {e}")
+        app_logger.error(f"Restore error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.get("/backups", response_model=ListBackupsResponse, tags=["Backup"])
 async def list_backups(backup_date: str = None):
-    """List all available backups"""
     try:
-        backups = backup_service.list_backups(backup_date=backup_date)
-        return ListBackupsResponse(
-            success=True,
-            backups=[BackupInfo(**b) for b in backups]
-        )
+        return ListBackupsResponse(success=True, backups=[BackupInfo(**b) for b in backup_service.list_backups(backup_date)])
     except Exception as e:
-        app_logger.error(f"Error listing backups: {e}")
+        app_logger.error(f"List backups error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.delete("/backups", response_model=BackupResponse, tags=["Backup"])
 async def delete_backup(backup_path: str):
-    """Delete a backup folder"""
     try:
-        result = backup_service.delete_backup(backup_path)
-
-        if not result["success"]:
-            return BackupResponse(success=False, error=result.get("error"))
-
-        return BackupResponse(success=True)
+        r = backup_service.delete_backup(backup_path)
+        return BackupResponse(success=r["success"], error=r.get("error"))
     except Exception as e:
-        app_logger.error(f"Error deleting backup: {e}")
+        app_logger.error(f"Delete backup error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
-# Health Check
 @router.get("/health", tags=["System"])
 async def health_check():
-    """Health check endpoint"""
-    return {
-        "status": "healthy",
-        "service": "BackupWin API",
-        "version": "1.0.0"
-    }
+    return {"status": "healthy", "service": "BackupWin API", "version": "1.0.0"}
